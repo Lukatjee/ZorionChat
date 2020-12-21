@@ -1,6 +1,0 @@
-name: ZorionChat
-version: 1.0-SNAPSHOT
-main: eu.lukatjee.zorionchat.zorionchat.ZorionChat
-api-version: 1.16
-authors: [ Lukatjee ]
-description: Premium chat plugin for quality minecraft networks.
