@@ -1,5 +1,8 @@
 package eu.lukatjee.zorionchat.zorionchat.events;
 
+import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -33,20 +36,58 @@ public class OnJoin implements Listener {
     }
 
     @EventHandler
-    public void onJoin(final PlayerJoinEvent event) {
+    public void onJoin(PlayerJoinEvent event) {
 
-        final Player player = event.getPlayer();
-        final String username = player.getName();
+        FileConfiguration config = ZorionChat.plugin.getConfig();
+        Player player = event.getPlayer();
+
+        /*
+
+            Execute this block when player has joined before and is not vanished.
+
+         */
 
         if (player.hasPlayedBefore() && !this.isVanished(player)) {
 
-            event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', "&8[&a&l+&8]&6 " + username + "&7 joined the server."));
+            String message = config.getString("join-message");
+
+            if (message.equals("")) {
+
+                event.setJoinMessage(null);
+
+            } else {
+
+                event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message)));
+
+            }
+
+        /*
+
+            Execute this block when player hasn't joined before.
+
+         */
 
         } else if (!player.hasPlayedBefore()) {
 
-            event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', "&8[&a&l+&8]&6 " + username + "&7 joined the server for the&6 first&7 time."));
+            String message = config.getString("first-join-message");
 
-        } else if (this.isVanished(player)) {
+            if (message.equals("")) {
+
+                event.setJoinMessage("");
+
+            } else {
+
+                event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message)));
+
+            }
+
+        /*
+
+            Execute this block when player is vanished.
+
+         */
+
+        } else if (isVanished(player)) {
 
             event.setJoinMessage(null);
 

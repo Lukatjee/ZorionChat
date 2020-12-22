@@ -1,15 +1,20 @@
 package eu.lukatjee.zorionchat.zorionchat.commands;
 
+import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class MainCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        FileConfiguration config = ZorionChat.plugin.getConfig();
+        String prefix = config.getString("prefix");
 
         if (args[0].equals("reload")) {
 
@@ -19,16 +24,21 @@ public class MainCommand implements CommandExecutor {
 
                 if (player.hasPermission("zorionchat.command.reload")) {
 
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&9ZorionChat&8]&a Successfully reloaded this plugin."));
+                    String message = config.getString("successfully-reloaded-plugin");
+                    ZorionChat.plugin.reloadConfig();
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
 
                 } else {
 
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&9ZorionChat&8]&c It appears that you don't have the permission to execute this command."));
+                    String message = config.getString("no-permission");
+                    ZorionChat.plugin.reloadConfig();
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
 
                 }
 
             } else {
 
+                ZorionChat.plugin.reloadConfig();
                 sender.sendMessage("[ZorionChat] Successfully reloaded this plugin.");
 
             }

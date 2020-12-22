@@ -1,0 +1,17 @@
+# Set the plugin prefix, set to "" to disable.
+prefix: "&8[&9ZorionChat&8]"
+
+# Set the no permission message here.
+no-permission: "&cIt appears that you do not have the permission."
+
+# Set the reload command message here
+successfully-reloaded-plugin: "&aSuccessfully reloaded this plugin."
+
+# Set the first join message here, set to "" to disable
+first-join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server for the first time"
+
+# Set the join message here, set to "" to disable
+join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server."
+
+# Set the leave message here, set to "" to disable
+leave-message: "&8[&c&l-&8]&6 %player_name%&7 left the server."

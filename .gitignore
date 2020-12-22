@@ -5,3 +5,7 @@ target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.l
 target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 
 target/
+
+.idea/libraries/
+
+.idea/

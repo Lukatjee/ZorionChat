@@ -1,5 +1,9 @@
 package eu.lukatjee.zorionchat.zorionchat.events;
 
+import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.MetadataValue;
@@ -34,12 +38,22 @@ public class OnQuit implements Listener {
     @EventHandler
     public void onQuit(final PlayerQuitEvent event) {
 
-        final Player player = event.getPlayer();
-        final String username = player.getName();
+        FileConfiguration config = ZorionChat.plugin.getConfig();
+        Player player = event.getPlayer();
 
         if (!this.isVanished(player)) {
 
-            event.setQuitMessage("&8[&c&l-&8]&6 " + username + "&7 left the server.");
+            String message = config.getString("leave-message");
+
+            if (message.equals("")) {
+
+                event.setQuitMessage(null);
+
+            } else {
+
+                event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message)));
+
+            }
 
         } else {
 
