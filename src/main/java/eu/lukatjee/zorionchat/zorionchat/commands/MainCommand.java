@@ -18,6 +18,12 @@ public class MainCommand implements CommandExecutor {
 
         if (args.length > 0) {
 
+            /*
+
+                Execute this block when /zorionchat reload is executed.
+
+             */
+
             if (args[0].equals("reload")) {
 
                 if (sender instanceof Player) {
@@ -46,6 +52,12 @@ public class MainCommand implements CommandExecutor {
                 }
 
             }
+
+        /*
+
+            Execute this block when no arguments are given.
+
+         */
 
         } else {
 

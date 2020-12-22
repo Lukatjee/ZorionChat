@@ -41,6 +41,12 @@ public class OnQuit implements Listener {
         FileConfiguration config = ZorionChat.plugin.getConfig();
         Player player = event.getPlayer();
 
+        /*
+
+            Execute this block when the player is not vanished.
+
+         */
+
         if (!this.isVanished(player)) {
 
             String message = config.getString("leave-message");
@@ -54,6 +60,12 @@ public class OnQuit implements Listener {
                 event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message)));
 
             }
+
+        /*
+
+            Execute this block when the player is vanished.
+
+         */
 
         } else {
 
