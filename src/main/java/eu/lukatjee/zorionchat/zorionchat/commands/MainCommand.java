@@ -16,32 +16,41 @@ public class MainCommand implements CommandExecutor {
         FileConfiguration config = ZorionChat.plugin.getConfig();
         String prefix = config.getString("prefix");
 
-        if (args[0].equals("reload")) {
+        if (args.length > 0) {
 
-            if (sender instanceof Player) {
+            if (args[0].equals("reload")) {
 
-                Player player = (Player) sender;
+                if (sender instanceof Player) {
 
-                if (player.hasPermission("zorionchat.command.reload")) {
+                    Player player = (Player) sender;
 
-                    String message = config.getString("successfully-reloaded-plugin");
-                    ZorionChat.plugin.reloadConfig();
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
+                    if (player.hasPermission("zorionchat.command.reload")) {
+
+                        String message = config.getString("successfully-reloaded-plugin");
+                        ZorionChat.plugin.reloadConfig();
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
+
+                    } else {
+
+                        String message = config.getString("no-permission");
+                        ZorionChat.plugin.reloadConfig();
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
+
+                    }
 
                 } else {
 
-                    String message = config.getString("no-permission");
                     ZorionChat.plugin.reloadConfig();
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
+                    sender.sendMessage("[ZorionChat] Successfully reloaded this plugin.");
 
                 }
 
-            } else {
-
-                ZorionChat.plugin.reloadConfig();
-                sender.sendMessage("[ZorionChat] Successfully reloaded this plugin.");
-
             }
+
+        } else {
+
+            String message = config.getString("help-command");
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
 
         }
 

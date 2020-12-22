@@ -4,6 +4,9 @@ prefix: "&8[&9ZorionChat&8]"
 # Set the no permission message here.
 no-permission: "&cIt appears that you do not have the permission."
 
+# Set the output when someone executes the help command.
+help-command: "&cSoon, you'll find some help here."
+
 # Set the reload command message here
 successfully-reloaded-plugin: "&aSuccessfully reloaded this plugin."
 
