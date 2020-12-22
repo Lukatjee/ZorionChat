@@ -1,3 +1,16 @@
+/*
+
+
+ ______           _             _____ _           _
+|___  /          (_)           /  __ \ |         | |
+   / /  ___  _ __ _  ___  _ __ | /  \/ |__   __ _| |_
+  / /  / _ \| '__| |/ _ \| '_ \| |   | '_ \ / _` | __|
+./ /__| (_) | |  | | (_) | | | | \__/\ | | | (_| | |_
+\_____/\___/|_|  |_|\___/|_| |_|\____/_| |_|\__,_|\__|
+
+
+ */
+
 package eu.lukatjee.zorionchat.zorionchat;
 
 import eu.lukatjee.zorionchat.zorionchat.commands.MainCommand;
