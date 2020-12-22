@@ -1,5 +1,6 @@
 package eu.lukatjee.zorionchat.zorionchat;
 
+import eu.lukatjee.zorionchat.zorionchat.commands.MainCommand;
 import eu.lukatjee.zorionchat.zorionchat.events.OnQuit;
 import eu.lukatjee.zorionchat.zorionchat.events.OnJoin;
 import org.bukkit.event.Listener;
@@ -12,12 +13,19 @@ public final class ZorionChat extends JavaPlugin implements Listener {
         /*
 
             Register events here.
-            These are external events.
 
          */
 
-        this.getServer().getPluginManager().registerEvents(new OnJoin(), this);
-        this.getServer().getPluginManager().registerEvents(new OnQuit(), this);
+        getServer().getPluginManager().registerEvents(new OnJoin(), this);
+        getServer().getPluginManager().registerEvents(new OnQuit(), this);
+
+        /*
+
+            Register commands here.
+
+         */
+
+        getCommand("zorionchat").setExecutor(new MainCommand());
 
     }
 
