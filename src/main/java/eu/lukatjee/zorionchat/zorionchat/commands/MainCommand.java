@@ -1,7 +1,7 @@
 package eu.lukatjee.zorionchat.zorionchat.commands;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
-import org.bukkit.ChatColor;
+import eu.lukatjee.zorionchat.zorionchat.utils.Format;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,8 +13,23 @@ public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        FileConfiguration config = ZorionChat.plugin.getConfig();
-        String prefix = config.getString("prefix");
+        /*
+
+            Initialize a few things here.
+
+         */
+
+        final FileConfiguration config = ZorionChat.plugin.getConfig();
+        final Format formatConverter = new Format();
+
+        /*
+
+            Predefine a couple of values here.
+
+         */
+
+        final String type = "configFormat";
+        final String prefix = formatConverter.formatConversion(type, config.getString("prefix"), (Player) sender);
 
         if (args.length > 0) {
 
@@ -28,19 +43,19 @@ public class MainCommand implements CommandExecutor {
 
                 if (sender instanceof Player) {
 
-                    Player player = (Player) sender;
+                    final Player player = (Player) sender;
 
                     if (player.hasPermission("zorionchat.command.reload")) {
 
                         String message = config.getString("successfully-reloaded-plugin");
                         ZorionChat.plugin.reloadConfig();
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
+                        player.sendMessage(prefix + formatConverter.formatConversion(type, message, player));
 
                     } else {
 
                         String message = config.getString("no-permission");
                         ZorionChat.plugin.reloadConfig();
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
+                        player.sendMessage(prefix + formatConverter.formatConversion(type, message, player));
 
                     }
 
@@ -62,7 +77,7 @@ public class MainCommand implements CommandExecutor {
         } else {
 
             String message = config.getString("help-command");
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + message));
+            sender.sendMessage(prefix + formatConverter.formatConversion(type, message, (Player) sender));
 
         }
 

@@ -1,45 +1,37 @@
 package eu.lukatjee.zorionchat.zorionchat.events;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
-import me.clip.placeholderapi.PlaceholderAPI;
+import eu.lukatjee.zorionchat.zorionchat.utils.Format;
+import eu.lukatjee.zorionchat.zorionchat.utils.VanishCheck;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
-import org.bukkit.ChatColor;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 public class OnJoin implements Listener {
 
-    /*
-
-        This class handles the PlayerJoinEvent
-        This also adds support for vanish plugins.
-
-     */
-
-    private boolean isVanished(final Player player) {
-
-        for (final MetadataValue meta : player.getMetadata("vanished")) {
-
-            if (meta.asBoolean()) {
-
-                return true;
-
-            }
-
-        }
-
-        return false;
-
-    }
-
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
 
-        FileConfiguration config = ZorionChat.plugin.getConfig();
-        Player player = event.getPlayer();
+        /*
+
+            Initialize a few things here.
+
+         */
+
+        final FileConfiguration config = ZorionChat.plugin.getConfig();
+        final VanishCheck vanish = new VanishCheck();
+        final Format formatConverter = new Format();
+
+        /*
+
+            Predefine a couple of values here.
+
+         */
+
+        final String type = "configFormat";
+        final Player player = event.getPlayer();
 
         /*
 
@@ -47,7 +39,7 @@ public class OnJoin implements Listener {
 
          */
 
-        if (player.hasPlayedBefore() && !this.isVanished(player)) {
+        if (player.hasPlayedBefore() && !vanish.isVanished(player)) {
 
             String message = config.getString("join-message");
 
@@ -57,7 +49,7 @@ public class OnJoin implements Listener {
 
             } else {
 
-                event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message)));
+                event.setJoinMessage(formatConverter.formatConversion(type, message, player));
 
             }
 
@@ -77,7 +69,7 @@ public class OnJoin implements Listener {
 
             } else {
 
-                event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message)));
+                event.setJoinMessage(formatConverter.formatConversion(type, message, player));
 
             }
 
@@ -87,7 +79,7 @@ public class OnJoin implements Listener {
 
          */
 
-        } else if (isVanished(player)) {
+        } else if (vanish.isVanished(player)) {
 
             event.setJoinMessage(null);
 

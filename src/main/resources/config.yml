@@ -1,23 +1,37 @@
-# Set the plugin prefix, set to "" to disable.
-prefix: "&8[&9ZorionChat&8]"
+#
+#                        ______           _             _____ _           _
+#                       |___  /          (_)           /  __ \ |         | |
+#                          / /  ___  _ __ _  ___  _ __ | /  \/ |__   __ _| |_
+#                         / /  / _ \| '__| |/ _ \| '_ \| |   | '_ \ / _` | __|
+#                       ./ /__| (_) | |  | | (_) | | | | \__/\ | | | (_| | |_
+#                       \_____/\___/|_|  |_|\___/|_| |_|\____/_| |_|\__,_|\__|
+#
+#                                           by Lukatjee
+#             https://www.spigotmc.org/resources/zorionchat-quick-and-easy-chat-manager.86984/
+#
+# Config version (DO NOT CHANGE THIS)
+version: "1.0"
 
-# Set the no permission message here.
-no-permission: "&cIt appears that you do not have the permission."
+# Set the prefix for plugin messages.
+prefix: "&8[&9ZorionChat&8] "
 
-# Set the output when someone executes the help command.
+# Set the output for the help command here. COMING SOON
 help-command: "&cSoon, you'll find some help here."
 
-# Set the reload command message here
+# Set the output for the no permission message here.
+no-permission: "&cIt appears that you do not have the permission."
+
+# Set the output for the reload command here.
 successfully-reloaded-plugin: "&aSuccessfully reloaded this plugin."
 
-# Set the first join message here, set to "" to disable
-first-join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server for the first time"
+# Edit the first join message, this can be disabled by setting this to ""
+first-join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server for the first time."
 
-# Set the join message here, set to "" to disable
+# Edit the join message, this can be disabled by setting this to ""
 join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server."
 
-# Set the leave message here, set to "" to disable
+# Edit the leave message, this can be disabled by setting this to ""
 leave-message: "&8[&c&l-&8]&6 %player_name%&7 left the server."
 
-# Set the chatformat here, don't leave empty, it's no fun.
+# Edit the chat format here.
 chat-format: "%player_displayname%&8 »&7 "

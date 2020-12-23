@@ -1,8 +1,7 @@
 package eu.lukatjee.zorionchat.zorionchat.events;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
-import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.ChatColor;
+import eu.lukatjee.zorionchat.zorionchat.utils.Format;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,9 +13,23 @@ public class OnChat implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
 
-        Player player = event.getPlayer();
-        String message = event.getMessage();
-        FileConfiguration config = ZorionChat.plugin.getConfig();
+        /*
+
+            Initialize a few things here.
+
+         */
+
+        final Format formatConverter = new Format();
+        final FileConfiguration config = ZorionChat.plugin.getConfig();
+
+        /*
+
+            Predefine a couple of values here.
+
+         */
+
+        final Player player = event.getPlayer();
+        final String message = event.getMessage();
 
         /*
 
@@ -24,9 +37,10 @@ public class OnChat implements Listener {
 
          */
 
-        String loadedFormat = config.getString("chat-format");
-        String coloredFormat = ChatColor.translateAlternateColorCodes('&', loadedFormat);
-        String format = PlaceholderAPI.setPlaceholders(player, coloredFormat);
+        String type = "configFormat";
+        final String loadedFormat = config.getString("chat-format");
+        final String format = formatConverter.formatConversion(type, loadedFormat, player);
+
 
         /*
 
@@ -34,15 +48,10 @@ public class OnChat implements Listener {
 
          */
 
-        if (!player.hasPermission("zorionchat.chat.color")) {
+        type = "chatFormat";
+        final String convertedMessage = formatConverter.formatConversion(type, message, player);
 
-            event.setFormat(format + message);
-
-        } else {
-
-            event.setFormat(format + ChatColor.translateAlternateColorCodes('&', message));
-
-        }
+        event.setFormat(format + convertedMessage);
 
     }
 
