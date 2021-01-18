@@ -9,29 +9,27 @@
 #                                           by Lukatjee
 #             https://www.spigotmc.org/resources/zorionchat-quick-and-easy-chat-manager.86984/
 #
-# Config version (DO NOT CHANGE THIS)
+# Config version (DO NOT CHANGE THIS).
 version: "1.0"
 
-# Set the prefix for plugin messages.
-prefix: "&8[&9ZorionChat&8] "
+# Edit the chat format here, cannot be disabled as it is the base feature of this plugin.
+chat-format: "%player_displayname% &8» &f"
 
-# Set the output for the help command here. COMING SOON
-help-command: "&cSoon, you'll find some help here."
-
-# Set the output for the no permission message here.
-no-permission: "&cIt appears that you do not have the permission."
-
-# Set the output for the reload command here.
-successfully-reloaded-plugin: "&aSuccessfully reloaded this plugin."
-
-# Edit the first join message, this can be disabled by setting this to ""
+# Edit the first join message here, set to "" to disable.
 first-join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server for the first time."
 
-# Edit the join message, this can be disabled by setting this to ""
+# Edit the join message here, set to "" to disable the custom join message.
 join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server."
 
-# Edit the leave message, this can be disabled by setting this to ""
-leave-message: "&8[&c&l-&8]&6 %player_name%&7 left the server."
+# Edit the quit message here, set to "" to disable the custom auit message.
+quit-message: "&8[&c&l-&8]&6 %player_name%&7 quit the server."
 
-# Edit the chat format here.
-chat-format: "%player_displayname%&8 »&7 "
+# Below you can configure all plugin messages to your likings, these messages support hex
+# and vanilla color codes. If you translated these messages and want to contribute
+# to the project you can send the translation(s) to me on Discord.
+
+# Edit the no permission message here, supports vanilla and hex color codes
+no-permission: "&cOh no! It appears you do not have the permission to execute this command."
+
+# Edit the reload command message here, supports vanilla and hex color codes.
+reload-message: "&aSuccessfully reloaded the chat configuration."

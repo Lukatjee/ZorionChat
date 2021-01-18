@@ -1,22 +1,9 @@
-/*
-
-
- ______           _             _____ _           _
-|___  /          (_)           /  __ \ |         | |
-   / /  ___  _ __ _  ___  _ __ | /  \/ |__   __ _| |_
-  / /  / _ \| '__| |/ _ \| '_ \| |   | '_ \ / _` | __|
-./ /__| (_) | |  | | (_) | | | | \__/\ | | | (_| | |_
-\_____/\___/|_|  |_|\___/|_| |_|\____/_| |_|\__,_|\__|
-
-
- */
-
 package eu.lukatjee.zorionchat.zorionchat;
 
 import eu.lukatjee.zorionchat.zorionchat.commands.MainCommand;
-import eu.lukatjee.zorionchat.zorionchat.events.OnChat;
-import eu.lukatjee.zorionchat.zorionchat.events.OnQuit;
-import eu.lukatjee.zorionchat.zorionchat.events.OnJoin;
+import eu.lukatjee.zorionchat.zorionchat.listeners.ChatListener;
+import eu.lukatjee.zorionchat.zorionchat.listeners.JoinEvent;
+import eu.lukatjee.zorionchat.zorionchat.listeners.QuitEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,38 +16,13 @@ public final class ZorionChat extends JavaPlugin implements Listener {
 
         plugin = this;
 
-        /*
-
-            Register events here.
-
-         */
-
-        getServer().getPluginManager().registerEvents(new OnJoin(), this);
-        getServer().getPluginManager().registerEvents(new OnQuit(), this);
-        getServer().getPluginManager().registerEvents(new OnChat(), this);
-
-        /*
-
-            Register commands here.
-
-         */
-
-        getCommand("zorionchat").setExecutor(new MainCommand());
-
-        /*
-
-            Get configuration file.
-
-         */
-
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        /*
-
-            Check whether placeholderapi is installed or not.
-
-         */
+        getServer().getPluginManager().registerEvents(new ChatListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new QuitEvent(), this);
+        getCommand("zorionchat").setExecutor(new MainCommand());
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 
@@ -68,7 +30,7 @@ public final class ZorionChat extends JavaPlugin implements Listener {
 
         } else {
 
-            getLogger().info("Could not find PlaceholderAPI! This plugin is required.");
+            getLogger().info("Could not find PlaceholderAPI! " + "This plugin is required.");
             Bukkit.getPluginManager().disablePlugin(this);
 
         }
