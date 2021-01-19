@@ -27,11 +27,11 @@ public class JoinEvent implements Listener {
 
         if (player.hasPlayedBefore() && !vanish && !joinMessage.equals("")) {
 
-            event.setJoinMessage(formatting.format(PlaceholderAPI.setPlaceholders(player, joinMessage)).replace("%", "%%"));
+            event.setJoinMessage(formatting.format(PlaceholderAPI.setPlaceholders(player, joinMessage)));
 
             } else if (!player.hasPlayedBefore() && !firstJoinMessage.equals("")) {
 
-                event.setJoinMessage(formatting.format(PlaceholderAPI.setPlaceholders(player, firstJoinMessage)).replace("%", "%%"));
+                event.setJoinMessage(formatting.format(PlaceholderAPI.setPlaceholders(player, firstJoinMessage)));
 
             } else if (vanish) {
 

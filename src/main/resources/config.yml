@@ -24,6 +24,15 @@ join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server."
 # Edit the quit message here, set to "" to disable the custom auit message.
 quit-message: "&8[&c&l-&8]&6 %player_name%&7 quit the server."
 
+# Below you can configure the permissions for the plugin, these can be anything you want
+# beware that once you change these, it won't be the same as in the documentation.
+
+# Edit the permission for reloading the plugin configuration.
+reload-command: "zorionchat.command.reload"
+
+# Edit the permission for using color codes in chat.
+format-permission: "zorionchat.chat.format"
+
 # Below you can configure all plugin messages to your likings, these messages support hex
 # and vanilla color codes. If you translated these messages and want to contribute
 # to the project you can send the translation(s) to me on Discord.

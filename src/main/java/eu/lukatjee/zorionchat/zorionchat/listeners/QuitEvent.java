@@ -25,7 +25,7 @@ public class QuitEvent implements Listener {
 
         if (!vanish && !quitMessage.equals("")) {
 
-            event.setQuitMessage(formatting.format(PlaceholderAPI.setPlaceholders(player, quitMessage)).replace("%", "%%"));
+            event.setQuitMessage(formatting.format(PlaceholderAPI.setPlaceholders(player, quitMessage)));
 
         } else if (vanish) {
 

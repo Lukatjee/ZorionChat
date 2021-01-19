@@ -17,7 +17,8 @@ public class ChatListener implements Listener {
         final Player player = event.getPlayer();
         final String message = event.getMessage().replace("%", "%%");
         final String chatFormat = ZorionChat.plugin.getConfig().getString("chat-format");
-        final boolean hasPermission = new PermissionCheck().permission(player, "chat-format");
+        final String permission = ZorionChat.plugin.getConfig().getString("format-permission");
+        final boolean hasPermission = new PermissionCheck().permission(player, permission);
 
         final FormatterUtil formatting = new FormatterUtil();
 

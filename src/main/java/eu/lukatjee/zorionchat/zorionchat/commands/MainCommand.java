@@ -14,16 +14,7 @@ public class MainCommand implements CommandExecutor {
         final ReloadUtil reload = new ReloadUtil();
         final FormatterUtil formatting = new FormatterUtil();
 
-        if (args.length > 0) {
-
-                if (args[0].equals("reload")) { reload.ReloadCommand(sender); }
-
-        } else {
-
-            sender.sendMessage(formatting.format("&6This feature is being worked on."));
-
-        }
-
+        if (args.length > 0) { if (args[0].equals("reload")) { reload.ReloadCommand(sender); } } else { sender.sendMessage(formatting.format("&6This feature is being worked on.")); }
         return false;
 
     }

@@ -14,19 +14,17 @@ public class ReloadUtil {
 
         if (sender instanceof Player) {
 
-            final String playerName = sender.getName();
+            final String player = sender.getName();
+            final String permission = configuration.getString("reload-command");
+            final boolean hasPermission = new PermissionCheck().permission(((Player) sender).getPlayer(), permission);
 
-            if (sender.hasPermission("zorionchat.reload")) {
+            if (hasPermission) {
 
                 sender.sendMessage(formatting.format(configuration.getString("reload-message")));
-                System.out.println("[ZorionChat] Plugin was reloaded by " + playerName + ".");
+                System.out.println("[ZorionChat] Plugin was reloaded by " + player + ".");
                 ZorionChat.plugin.reloadConfig();
 
-            } else {
-
-                sender.sendMessage(formatting.format(configuration.getString("no-permission")));
-
-            }
+            } else { sender.sendMessage(formatting.format(configuration.getString("no-permission"))); }
 
         } else {
 
