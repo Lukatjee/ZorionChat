@@ -9,3 +9,6 @@ commands:
   zorionchat:
     description: Base command.
     aliases: [ chat, zc ]
+  staffchat:
+    description: Toggle or send a message to other players with the staff chat permission.
+    aliases: [ s ]

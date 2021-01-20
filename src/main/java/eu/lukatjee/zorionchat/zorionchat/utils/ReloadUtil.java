@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 
 public class ReloadUtil {
 
-    final FormatterUtil formatting = new FormatterUtil();
     final FileConfiguration configuration = ZorionChat.plugin.getConfig();
+    final FormatterUtil formatting = new FormatterUtil();
 
     public void ReloadCommand(CommandSender sender) {
 

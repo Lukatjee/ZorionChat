@@ -5,11 +5,12 @@ import eu.lukatjee.zorionchat.zorionchat.utils.ReloadUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class MainCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
 
         final ReloadUtil reload = new ReloadUtil();
         final FormatterUtil formatting = new FormatterUtil();

@@ -1,6 +1,7 @@
 package eu.lukatjee.zorionchat.zorionchat;
 
 import eu.lukatjee.zorionchat.zorionchat.commands.MainCommand;
+import eu.lukatjee.zorionchat.zorionchat.commands.StaffChat;
 import eu.lukatjee.zorionchat.zorionchat.listeners.ChatListener;
 import eu.lukatjee.zorionchat.zorionchat.listeners.JoinEvent;
 import eu.lukatjee.zorionchat.zorionchat.listeners.QuitEvent;
@@ -23,6 +24,7 @@ public final class ZorionChat extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new QuitEvent(), this);
         getCommand("zorionchat").setExecutor(new MainCommand());
+        getCommand("staffchat").setExecutor(new StaffChat());
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 

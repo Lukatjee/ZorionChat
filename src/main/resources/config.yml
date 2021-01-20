@@ -10,10 +10,13 @@
 #            			    https://polymart.org/resource/zorionchat.667#!
 #
 # Config version (DO NOT CHANGE THIS).
-version: "1.0"
+version: "2.0-BETA_1.2"
 
 # Edit the chat format here, cannot be disabled as it is the base feature of this plugin.
 chat-format: "%player_displayname% &8» &f"
+
+# Edit the staffchat format here, cannot be disabled as it is another base feature of this plugin.
+staffchat-format: "&8[&cStaff&8]&f %player_name%&8 » &f"
 
 # Edit the first join message here, set to "" to disable.
 first-join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server for the first time."
@@ -33,12 +36,21 @@ reload-command: "zorionchat.command.reload"
 # Edit the permission for using color codes in chat.
 format-permission: "zorionchat.chat.format"
 
+# Edit the permission for using and reading staffchat.
+staffchat-permission: "zorionchat.chat.staff"
+
 # Below you can configure all plugin messages to your likings, these messages support hex
 # and vanilla color codes. If you translated these messages and want to contribute
 # to the project you can send the translation(s) to me on Discord.
 
-# Edit the no permission message here, supports vanilla and hex color codes
+# Edit the no permission message.
 no-permission: "&cOh no! It appears you do not have the permission to execute this command."
 
-# Edit the reload command message here, supports vanilla and hex color codes.
+# Edit the reload command message.
 reload-message: "&aSuccessfully reloaded the chat configuration."
+
+# Edit the staffchat enabled message.
+staffchat-enabled: "&7Staffchat was turned&a ON"
+
+# Edit the staffchat disabled message.
+staffchat-disabled: "&7Staffchat was turned&c OFF"
