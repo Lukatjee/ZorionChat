@@ -7,6 +7,7 @@ import eu.lukatjee.zorionchat.zorionchat.commands.StaffChat;
 import eu.lukatjee.zorionchat.zorionchat.listeners.ChatListener;
 import eu.lukatjee.zorionchat.zorionchat.listeners.JoinEvent;
 import eu.lukatjee.zorionchat.zorionchat.listeners.QuitEvent;
+import eu.lukatjee.zorionchat.zorionchat.utils.SocialSpy;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +30,7 @@ public final class ZorionChat extends JavaPlugin implements Listener {
         getCommand("message").setExecutor(new MessageCommand());
         getCommand("reply").setExecutor(new ReplyCommand());
         getCommand("staffchat").setExecutor(new StaffChat());
+        getCommand("socialspy").setExecutor(new SocialSpy());
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
 

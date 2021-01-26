@@ -92,31 +92,7 @@ public class ReplyCommand implements CommandExecutor {
                     lastMessaged.put(senderUUID, receiverUUID);
                     lastMessaged.put(receiverUUID, senderUUID);
 
-                    for (Player tempPlayer : Bukkit.getOnlinePlayers()) {
-
-                        UUID tempPlayerUUID = tempPlayer.getUniqueId();
-
-                        if (tempPlayer.hasPermission(socialSpyPermission)) {
-
-                            if (socialSpyEnabled.get((tempPlayerUUID)).equals("true")) {
-
-                                final String spyFormat = configuration.getString("socialspy-format").replace("{sender}", player.getName()).replace("{receiver}", receiver.getName());
-                                tempPlayer.sendMessage(formatting.format(spyFormat + message));
-
-                            }
-
-                        } else {
-
-                            if (socialSpyEnabled.get((tempPlayerUUID)).equals("true")) {
-
-                                socialSpyEnabled.replace(tempPlayerUUID, "true", "false");
-                                tempPlayer.sendMessage(formatting.format(socialSpyDisabled));
-
-                            }
-
-                        }
-
-                    }
+                    SocialSpy.socialSpyHandler(socialSpyPermission, player, receiver, message, socialSpyDisabled);
 
                 // [3] Returns error when the player hasn't messaged anyone recently
 
