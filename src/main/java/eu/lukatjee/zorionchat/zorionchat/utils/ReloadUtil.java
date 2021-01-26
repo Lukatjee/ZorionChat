@@ -25,16 +25,16 @@ public class ReloadUtil {
 
             sender.sendMessage(formatting.format(configuration.getString("reload-message")));
             System.out.println("[ZorionChat] Plugin was reloaded by " + player + ".");
-            plugin.reloadConfig();
 
-        // [1] Handles the reload command for the console
+            // [1] Handles the reload command for the console
 
         } else {
 
             System.out.println("[ZorionChat] Plugin was reloaded by console.");
-            plugin.reloadConfig();
 
         }
+
+        plugin.reloadConfig();
 
     }
 

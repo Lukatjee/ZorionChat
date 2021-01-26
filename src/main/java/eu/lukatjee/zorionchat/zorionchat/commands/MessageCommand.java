@@ -79,14 +79,13 @@ public class MessageCommand implements CommandExecutor {
 
                     if (hasFormattingPermission) {
 
-                        player.sendMessage(formatting.format(formatSender) + message);
                         receiver.sendMessage(formatting.format(formatReceiver + message));
+                        player.sendMessage(formatting.format(formatSender + message));
 
                     // [4] Returns non-formatted chatmessage except for the general chatformat set in config.yml
 
                     } else {
 
-                        player.sendMessage(formatting.format(formatSender) + message);
                         receiver.sendMessage(formatting.format(formatReceiver) + message);
 
                     }
@@ -132,7 +131,7 @@ public class MessageCommand implements CommandExecutor {
 
             }
 
-        // [1] Returns error when the player doesnt have the permission
+        // [1] Returns error when the player doesn't have the permission
 
         } else {
 
