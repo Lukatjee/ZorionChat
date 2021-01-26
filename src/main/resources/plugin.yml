@@ -12,3 +12,9 @@ commands:
   staffchat:
     description: Toggle or send a message to other players with the staff chat permission.
     aliases: [ s ]
+  message:
+    description: Message command, private message another player.
+    aliases: [ msg, tell, whisper ]
+  reply:
+    description: Quickly message the player you last messaged.
+    aliases: [ r ]

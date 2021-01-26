@@ -1,7 +1,9 @@
 package eu.lukatjee.zorionchat.zorionchat.listeners;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
+import eu.lukatjee.zorionchat.zorionchat.commands.MessageCommand;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
+import eu.lukatjee.zorionchat.zorionchat.utils.SocialSpy;
 import eu.lukatjee.zorionchat.zorionchat.utils.VanishCheck;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -18,6 +20,8 @@ public class QuitEvent implements Listener {
     @EventHandler
     public void quitEvent(PlayerQuitEvent event) {
 
+        // [0] Initial variables
+
         final Player player = event.getPlayer();
 
         final FileConfiguration configuration = ZorionChat.plugin.getConfig();
@@ -25,6 +29,8 @@ public class QuitEvent implements Listener {
 
         final String quitMessage = configuration.getString("quit-message");
         final boolean vanish = new VanishCheck().isVanished(player);
+
+        // [1] Checks whether the player is vanished or the quitmessage has been disabled
 
         if (!vanish && !quitMessage.equals("")) {
 
@@ -36,14 +42,20 @@ public class QuitEvent implements Listener {
 
         }
 
+        // [2] Removes the hashmap values to save space and to be able to set default values in joinmessage class without overwriting
+
         channelDataRemover(player);
 
     }
+
+    // [2] Actual class that removes the hashmap values
 
     private void channelDataRemover(Player player) {
 
         final UUID playerUUID = Bukkit.getServer().getPlayer(player.getName()).getUniqueId();
         JoinEvent.currentChannel.remove(playerUUID);
+        MessageCommand.lastMessaged.remove(playerUUID);
+        SocialSpy.socialSpyEnabled.remove(playerUUID);
 
     }
 

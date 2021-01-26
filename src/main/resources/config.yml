@@ -12,39 +12,68 @@
 # Config version (DO NOT CHANGE THIS).
 version: "2.0-BETA_1.2"
 
+
+
+# Below are all base features, these cannot be disabled. Each format below supports color codes and hex color codes,
+# while most formats support placeholders, the message format only translates the built-in placeholders {sender} and {receiver}.
+
 # Edit the chat format here, cannot be disabled as it is the base feature of this plugin.
 chat-format: "%player_displayname% &8» &f"
 
 # Edit the staffchat format here, cannot be disabled as it is another base feature of this plugin.
 staffchat-format: "&8[&cStaff&8]&f %player_name%&8 » &f"
 
-# Edit the first join message here, set to "" to disable.
+# Edit the format for the message sender here, this cannot be disabled as it is a base feature.
+msg-format-sender: "&aMSG &8| &f{sender} &8> &f{receiver} &8» &f"
+
+# Edit the format for the message receiver here, this cannot be disabled as it is a base feature.
+msg-format-receiver: "&aMSG &8| &f{sender} &8> &f{receiver} &8» &f"
+
+# Edit the socialspy format here, this cannot be disabled as it belongs to the message feature.
+socialspy-format: "&cSPY &8| &f{sender} &8> &f{receiver} &8» &f"
+
+
+
+# Below you can configure the different join and quit messages, these can ofcourse also be disabled by
+# setting these to "". In there placeholders, color codes and hex color codes are supported.
+
+# Edit the first join message here.
 first-join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server for the first time."
 
-# Edit the join message here, set to "" to disable the custom join message.
+# Edit the join message here.
 join-message: "&8[&a&l+&8]&6 %player_name%&7 joined the server."
 
-# Edit the quit message here, set to "" to disable the custom auit message.
+# Edit the quit message here.
 quit-message: "&8[&c&l-&8]&6 %player_name%&7 quit the server."
+
+
 
 # Below you can configure the permissions for the plugin, these can be anything you want
 # beware that once you change these, it won't be the same as in the documentation.
 
 # Edit the permission for reloading the plugin configuration.
-reload-command: "zorionchat.command.reload"
-
-# Edit the permission for using color codes in chat.
-format-permission: "zorionchat.chat.format"
+reload-permission: "zorionchat.command.reload"
 
 # Edit the permission for using and reading staffchat.
 staffchat-permission: "zorionchat.chat.staff"
 
+# Edit the permission to use socialspy.
+socialspy-permission: "zorionchat.command.socialspy"
+
+# Edit the permission for using color codes in chat.
+format-permission: "zorionchat.chat.format"
+
+# Edit the permission for messaging players.
+msg-permission: "zorionchat.command.msg"
+
+# Edit the permission for quickly replying to players.
+reply-permission: "zorionchat.command.reply"
+
+
+
 # Below you can configure all plugin messages to your likings, these messages support hex
 # and vanilla color codes. If you translated these messages and want to contribute
 # to the project you can send the translation(s) to me on Discord.
-
-# Edit the no permission message.
-no-permission: "&cOh no! It appears you do not have the permission to execute this command."
 
 # Edit the reload command message.
 reload-message: "&aSuccessfully reloaded the chat configuration."
@@ -54,3 +83,18 @@ staffchat-enabled: "&7Staffchat was turned&a ON"
 
 # Edit the staffchat disabled message.
 staffchat-disabled: "&7Staffchat was turned&c OFF"
+
+# Edit the socialspy enabled message.
+socialspy-enabled: "&7Socialspy was turned&a ON"
+
+# Edit the socialspy disabled message.
+socialspy-disabled: "&7Socialspy was turned&c OFF"
+
+# Edit the message for when the player hasn't entered the required arguments.
+incorrect-arguments: "&cOh, that's unfortunate... it seems like you didnt enter the the correct arguments."
+
+# Edit the message for when the plugin couldn't find a certain player.
+invalid-player: "&cUh-oh, I couldn't find this player for you. I'm terribly sorry!"
+
+# Edit the message for when the player hasn't messaged anybody recently.
+no-recent-msg: "&cI feel bad for you, but it seems that you haven't been messaged recently..."

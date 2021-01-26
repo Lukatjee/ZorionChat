@@ -19,6 +19,8 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
 
+        // [0] Initial variables
+
         final Player player = event.getPlayer();
         final UUID playerUUID = player.getUniqueId();
 
@@ -37,41 +39,35 @@ public class ChatListener implements Listener {
         final boolean hasFormatPermission = new PermissionCheck().permission(player, permissionFormat);
         final boolean hasStaffPermission = new PermissionCheck().permission(player, permissionStaff);
 
-        // Converts the message for the chat.
+        // [1] Checks what the players current channel is and sends their message to that channel
 
-        if (value != null) {
+        if (value.equals("global")) {
 
-            if (value.equals("global")) {
+            String format = formatting.format(PlaceholderAPI.setPlaceholders(player, globalFormat)).replace("%", "%%");
 
-                String format = formatting.format(PlaceholderAPI.setPlaceholders(player, globalFormat)).replace("%", "%%");
+            if (hasFormatPermission) {
 
-                if (hasFormatPermission) {
+                event.setFormat(format + formatting.format(message));
 
-                    event.setFormat(format + formatting.format(message));
+            } else {
 
-                } else {
+                event.setFormat(format + message);
 
-                    event.setFormat(format + message);
+            }
 
-                }
+        } else if (value.equals("staff")) {
 
+            String format = formatting.format(PlaceholderAPI.setPlaceholders(player, staffFormat));
+            event.setCancelled(true);
 
-            } else if (value.equals("staff")) {
+            if (player.hasPermission(permissionStaff)) {
 
-                String format = formatting.format(PlaceholderAPI.setPlaceholders(player, staffFormat));
-                event.setCancelled(true);
+                Bukkit.broadcast(format + formatting.format(message), permissionStaff);
 
-                if (player.hasPermission(permissionStaff)) {
+            } else {
 
-                    Bukkit.broadcast(format + formatting.format(message), permissionStaff);
-
-                } else {
-
-                    currentChannel.replace(playerUUID, "staff", "global");
-                    player.sendMessage(formatting.format(staffchatDisabled));
-
-
-                }
+                currentChannel.replace(playerUUID, "staff", "global");
+                player.sendMessage(formatting.format(staffchatDisabled));
 
             }
 

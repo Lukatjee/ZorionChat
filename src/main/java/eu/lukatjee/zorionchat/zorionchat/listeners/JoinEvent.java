@@ -2,6 +2,7 @@ package eu.lukatjee.zorionchat.zorionchat.listeners;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
+import eu.lukatjee.zorionchat.zorionchat.utils.SocialSpy;
 import eu.lukatjee.zorionchat.zorionchat.utils.VanishCheck;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -19,6 +20,8 @@ public class JoinEvent implements Listener {
     @EventHandler
     public void joinEvent(PlayerJoinEvent event) {
 
+        // [0] Initial variables
+
         final Player player = event.getPlayer();
 
         final FileConfiguration configuration = ZorionChat.plugin.getConfig();
@@ -28,6 +31,7 @@ public class JoinEvent implements Listener {
         final String firstJoinMessage = configuration.getString("first-join-message");
         final boolean vanish = new VanishCheck().isVanished(player);
 
+        // [1] Checks whether the player has joined before, that the player isn't vanished and whether the joinmessage hasn't been disabled
 
         if (player.hasPlayedBefore() && !vanish && !joinMessage.equals("")) {
 
@@ -43,16 +47,23 @@ public class JoinEvent implements Listener {
 
         }
 
+        // [2] Sets all the players hashmaps to the default values
+
         channelMover(player);
 
     }
 
+    // [3] Current channel hashmap made accessible in other classes
+
     public static HashMap<UUID, String> currentChannel = new HashMap<UUID, String>();
+
+    // [2] Actual object that sets hashmap values to default
 
     private void channelMover(Player player) {
 
         final UUID playerUUID = Bukkit.getServer().getPlayer(player.getName()).getUniqueId();
         currentChannel.put(playerUUID, "global");
+        SocialSpy.socialSpyEnabled.put(playerUUID, "false");
 
         }
 

@@ -7,29 +7,32 @@ import org.bukkit.entity.Player;
 
 public class ReloadUtil {
 
-    final FileConfiguration configuration = ZorionChat.plugin.getConfig();
-    final FormatterUtil formatting = new FormatterUtil();
-
     public void ReloadCommand(CommandSender sender) {
+
+        // [0] Initial variables
+
+        final FileConfiguration configuration = ZorionChat.plugin.getConfig();
+        final FormatterUtil formatting = new FormatterUtil();
+        final ZorionChat plugin = ZorionChat.plugin;
+
+        // [1] Checks whether the sender is a player or not
 
         if (sender instanceof Player) {
 
+            // [0] Initial variables
+
             final String player = sender.getName();
-            final String permission = configuration.getString("reload-command");
-            final boolean hasPermission = new PermissionCheck().permission(((Player) sender).getPlayer(), permission);
 
-            if (hasPermission) {
+            sender.sendMessage(formatting.format(configuration.getString("reload-message")));
+            System.out.println("[ZorionChat] Plugin was reloaded by " + player + ".");
+            plugin.reloadConfig();
 
-                sender.sendMessage(formatting.format(configuration.getString("reload-message")));
-                System.out.println("[ZorionChat] Plugin was reloaded by " + player + ".");
-                ZorionChat.plugin.reloadConfig();
-
-            } else { sender.sendMessage(formatting.format(configuration.getString("no-permission"))); }
+        // [1] Handles the reload command for the console
 
         } else {
 
             System.out.println("[ZorionChat] Plugin was reloaded by console.");
-            ZorionChat.plugin.reloadConfig();
+            plugin.reloadConfig();
 
         }
 

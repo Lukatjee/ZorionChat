@@ -23,6 +23,8 @@ public class StaffChat implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
+        // [0] Initial variables
+
         final Player player = Bukkit.getServer().getPlayer(sender.getName());
         final UUID playerUUID = Bukkit.getServer().getPlayer(sender.getName()).getUniqueId();
 
@@ -31,6 +33,7 @@ public class StaffChat implements CommandExecutor {
         final FormatterUtil formatting = new FormatterUtil();
 
         final String value = currentChannel.get(playerUUID);
+
         final String staffChatEnabled = configuration.getString("staffchat-enabled");
         final String staffChatDisabled = configuration.getString("staffchat-disabled");
         final String noPermission = configuration.getString("no-permission");
@@ -38,25 +41,29 @@ public class StaffChat implements CommandExecutor {
 
         final boolean hasPermission = new PermissionCheck().permission(player, permission);
 
+        // [1] Permission check
+
         if (hasPermission) {
+
+            // [2] Checks whether the command has arguments or not
 
             if (args.length == 0) {
 
-                if (value != null) {
+                // [3] Checks the players current channel and changes according to the current channel
 
-                    if (value.equals("global")) {
+                if (value.equals("global")) {
 
-                        currentChannel.replace(playerUUID, "global", "staff");
-                        sender.sendMessage(formatting.format(staffChatEnabled));
+                    currentChannel.replace(playerUUID, "global", "staff");
+                    sender.sendMessage(formatting.format(staffChatEnabled));
 
-                    } else if (value.equals("staff")) {
+                } else {
 
-                        currentChannel.replace(playerUUID, "staff", "global");
-                        sender.sendMessage(formatting.format(staffChatDisabled));
-
-                    }
+                    currentChannel.replace(playerUUID, "staff", "global");
+                    sender.sendMessage(formatting.format(staffChatDisabled));
 
                 }
+
+            // [2] When the command has multiple arguments the code below will be executed
 
             } else {
 
@@ -68,6 +75,8 @@ public class StaffChat implements CommandExecutor {
                 Bukkit.broadcast(formatting.format(format + message), permission);
 
             }
+
+        // [0] Returns error when the player doesn't have permission
 
         } else {
 
