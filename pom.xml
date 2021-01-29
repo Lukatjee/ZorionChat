@@ -6,7 +6,7 @@
 
     <groupId>eu.lukatjee.zorionchat</groupId>
     <artifactId>ZorionChat</artifactId>
-    <version>v2.0-BETA_1.3</version>
+    <version>v2.0-BETA_1.3.1</version>
     <packaging>jar</packaging>
 
     <name>ZorionChat</name>

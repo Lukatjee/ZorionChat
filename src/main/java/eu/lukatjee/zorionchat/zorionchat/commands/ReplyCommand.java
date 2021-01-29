@@ -2,7 +2,6 @@ package eu.lukatjee.zorionchat.zorionchat.commands;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
-import eu.lukatjee.zorionchat.zorionchat.utils.PermissionCheck;
 import eu.lukatjee.zorionchat.zorionchat.utils.SocialSpy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -41,12 +40,9 @@ public class ReplyCommand implements CommandExecutor {
         final String noRecentMessage = configuration.getString("no-recent-msg");
         final String socialSpyDisabled = configuration.getString("socialspy-disabled");
 
-        final boolean hasReplyPermission = new PermissionCheck().permission(player, permission);
-        final boolean hasFormattingPermission = new PermissionCheck().permission(player, formattingPermission);
-
         // [1] Permission check
 
-        if (hasReplyPermission) {
+        if (player.hasPermission(permission)) {
 
             // [2] Checks if enough arguments are given
 
@@ -73,7 +69,7 @@ public class ReplyCommand implements CommandExecutor {
 
                     // [4] Checks if sender has permission to format their messages in general
 
-                    if (hasFormattingPermission) {
+                    if (player.hasPermission(formattingPermission)) {
 
                         player.sendMessage(formatting.format(formatSender + message));
                         receiver.sendMessage(formatting.format(formatReceiver + message));

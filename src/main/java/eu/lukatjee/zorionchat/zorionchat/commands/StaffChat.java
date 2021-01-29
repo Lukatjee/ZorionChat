@@ -3,7 +3,6 @@ package eu.lukatjee.zorionchat.zorionchat.commands;
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
 import eu.lukatjee.zorionchat.zorionchat.listeners.JoinEvent;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
-import eu.lukatjee.zorionchat.zorionchat.utils.PermissionCheck;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -39,11 +38,9 @@ public class StaffChat implements CommandExecutor {
         final String noPermission = configuration.getString("no-permission");
         final String permission = configuration.getString("staffchat-permission");
 
-        final boolean hasPermission = new PermissionCheck().permission(player, permission);
-
         // [1] Permission check
 
-        if (hasPermission) {
+        if (player.hasPermission(permission)) {
 
             // [2] Checks whether the command has arguments or not
 

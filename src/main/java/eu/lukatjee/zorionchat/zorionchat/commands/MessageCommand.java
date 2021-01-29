@@ -2,7 +2,6 @@ package eu.lukatjee.zorionchat.zorionchat.commands;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
-import eu.lukatjee.zorionchat.zorionchat.utils.PermissionCheck;
 import eu.lukatjee.zorionchat.zorionchat.utils.SocialSpy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -40,12 +39,9 @@ public class MessageCommand implements CommandExecutor {
         final String cantFindPlayer = configuration.getString("invalid-player");
         final String noPermission = configuration.getString("no-permission");
 
-        final boolean hasMessagePermission = new PermissionCheck().permission(player, permission);
-        final boolean hasFormattingPermission = new PermissionCheck().permission(player, formattingPermission);
-
         // [1] Permission check
 
-        if (hasMessagePermission) {
+        if (player.hasPermission(permission)) {
 
             // [2] Checks if enough arguments are given
 
@@ -77,7 +73,7 @@ public class MessageCommand implements CommandExecutor {
 
                     // [4] Checks if sender has permission to format their messages in general
 
-                    if (hasFormattingPermission) {
+                    if (player.hasPermission(formattingPermission)) {
 
                         receiver.sendMessage(formatting.format(formatReceiver + message));
                         player.sendMessage(formatting.format(formatSender + message));

@@ -2,7 +2,6 @@ package eu.lukatjee.zorionchat.zorionchat.listeners;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
-import eu.lukatjee.zorionchat.zorionchat.utils.PermissionCheck;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -36,16 +35,13 @@ public class ChatListener implements Listener {
         final String permissionFormat = configuration.getString("format-permission");
         final String permissionStaff = configuration.getString("staffchat-permission");
 
-        final boolean hasFormatPermission = new PermissionCheck().permission(player, permissionFormat);
-        final boolean hasStaffPermission = new PermissionCheck().permission(player, permissionStaff);
-
         // [1] Checks what the players current channel is and sends their message to that channel
 
         if (value.equals("global")) {
 
             String format = formatting.format(PlaceholderAPI.setPlaceholders(player, globalFormat)).replace("%", "%%");
 
-            if (hasFormatPermission) {
+            if (player.hasPermission(permissionFormat)) {
 
                 event.setFormat(format + formatting.format(message));
 

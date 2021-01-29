@@ -28,18 +28,28 @@ public class SocialSpy implements CommandExecutor {
         final String value = socialSpyEnabled.get(playerUUID);
         final String socialSpyEnabledMessage = configuration.getString("socialspy-enabled");
         final String socialSpyDisabled = configuration.getString("socialspy-disabled");
+        final String noPermission = configuration.getString("no-permission");
+        final String socialSpyPermission = configuration.getString("socialspy-permission");
 
         // [1] Check if the staff member has enabled socialspy
 
-        if (value.equals("true")) {
+        if (player.hasPermission(socialSpyPermission)) {
 
-            socialSpyEnabled.replace(playerUUID, "true", "false");
-            player.sendMessage(formatting.format(socialSpyDisabled));
+            if (value.equals("true")) {
+
+                socialSpyEnabled.replace(playerUUID, "true", "false");
+                player.sendMessage(formatting.format(socialSpyDisabled));
+
+            } else {
+
+                socialSpyEnabled.replace(playerUUID, "false", "true");
+                player.sendMessage(formatting.format(socialSpyEnabledMessage));
+
+            }
 
         } else {
 
-            socialSpyEnabled.replace(playerUUID, "false", "true");
-            player.sendMessage(formatting.format(socialSpyEnabledMessage));
+            player.sendMessage(formatting.format(noPermission));
 
         }
 

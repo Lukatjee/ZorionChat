@@ -2,7 +2,6 @@ package eu.lukatjee.zorionchat.zorionchat.commands;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
-import eu.lukatjee.zorionchat.zorionchat.utils.PermissionCheck;
 import eu.lukatjee.zorionchat.zorionchat.utils.ReloadUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -23,8 +22,8 @@ public class MainCommand implements CommandExecutor {
         final ReloadUtil reload = new ReloadUtil();
         final FormatterUtil formatting = new FormatterUtil();
         final FileConfiguration configuration = ZorionChat.plugin.getConfig();
+        final String noPermission = configuration.getString("no-permission");
         final String permission = configuration.getString("reload-permission");
-        final boolean hasPermission = new PermissionCheck().permission(player, permission);
 
         // [0] Check if arguments are given
 
@@ -36,7 +35,7 @@ public class MainCommand implements CommandExecutor {
 
                 // [2] Checks if player has permission to execute the reload command
 
-                if (hasPermission) {
+                if (player.hasPermission(permission)) {
 
                     reload.ReloadCommand(sender);
 
@@ -44,7 +43,7 @@ public class MainCommand implements CommandExecutor {
 
                 } else {
 
-                    sender.sendMessage(formatting.format(configuration.getString("no-permission")));
+                    sender.sendMessage(formatting.format(noPermission));
 
                 }
             }

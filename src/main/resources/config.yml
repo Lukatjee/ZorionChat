@@ -10,7 +10,7 @@
 #            			    https://polymart.org/resource/zorionchat.667#!
 #
 # Config version (DO NOT CHANGE THIS).
-version: "2.0-BETA_1.3"
+version: "2.0-BETA_1.3.1"
 
 
 
@@ -89,6 +89,9 @@ socialspy-enabled: "&7Socialspy was turned&a ON"
 
 # Edit the socialspy disabled message.
 socialspy-disabled: "&7Socialspy was turned&c OFF"
+
+# Edit the no permission error here.
+no-permission: "&cI regret to inform you about this... but you do not have the permission to do this."
 
 # Edit the message for when the player hasn't entered the required arguments.
 incorrect-arguments: "&cOh, that's unfortunate... it seems like you didnt enter the the correct arguments."
