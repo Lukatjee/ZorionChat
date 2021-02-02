@@ -15,6 +15,7 @@ public class FormatterUtil {
         if (Bukkit.getVersion().contains("1.16")) {
 
             Matcher match = pattern.matcher(message);
+
             while (match.find()) {
 
                 String color = message.substring(match.start(), match.end());

@@ -16,8 +16,6 @@ public class SocialSpy implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        // [0] Initial variables
-
         final Player player = Bukkit.getServer().getPlayer(sender.getName());
         final UUID playerUUID = player.getUniqueId();
 
@@ -26,12 +24,12 @@ public class SocialSpy implements CommandExecutor {
         final FormatterUtil formatting = new FormatterUtil();
 
         final String value = socialSpyEnabled.get(playerUUID);
+
+        final String socialSpyPermission = configuration.getString("socialspy-permission");
+
         final String socialSpyEnabledMessage = configuration.getString("socialspy-enabled");
         final String socialSpyDisabled = configuration.getString("socialspy-disabled");
         final String noPermission = configuration.getString("no-permission");
-        final String socialSpyPermission = configuration.getString("socialspy-permission");
-
-        // [1] Check if the staff member has enabled socialspy
 
         if (player.hasPermission(socialSpyPermission)) {
 

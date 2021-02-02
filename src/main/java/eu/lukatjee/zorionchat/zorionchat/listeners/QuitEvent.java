@@ -20,17 +20,14 @@ public class QuitEvent implements Listener {
     @EventHandler
     public void quitEvent(PlayerQuitEvent event) {
 
-        // [0] Initial variables
-
         final Player player = event.getPlayer();
 
         final FileConfiguration configuration = ZorionChat.plugin.getConfig();
         final FormatterUtil formatting = new FormatterUtil();
 
         final String quitMessage = configuration.getString("quit-message");
-        final boolean vanish = new VanishCheck().isVanished(player);
 
-        // [1] Checks whether the player is vanished or the quitmessage has been disabled
+        final boolean vanish = new VanishCheck().isVanished(player);
 
         if (!vanish && !quitMessage.equals("")) {
 
@@ -42,13 +39,9 @@ public class QuitEvent implements Listener {
 
         }
 
-        // [2] Removes the hashmap values to save space and to be able to set default values in joinmessage class without overwriting
-
         channelDataRemover(player);
 
     }
-
-    // [2] Actual class that removes the hashmap values
 
     private void channelDataRemover(Player player) {
 

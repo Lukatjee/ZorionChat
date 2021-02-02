@@ -1,6 +1,7 @@
 package eu.lukatjee.zorionchat.zorionchat.commands;
 
 import eu.lukatjee.zorionchat.zorionchat.ZorionChat;
+import eu.lukatjee.zorionchat.zorionchat.utils.ChatLock;
 import eu.lukatjee.zorionchat.zorionchat.utils.FormatterUtil;
 import eu.lukatjee.zorionchat.zorionchat.utils.ReloadUtil;
 import org.bukkit.Bukkit;
@@ -11,44 +12,83 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+
 public class MainCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
 
-        // Initial variables
-
         final Player player = Bukkit.getServer().getPlayer(sender.getName());
-        final ReloadUtil reload = new ReloadUtil();
-        final FormatterUtil formatting = new FormatterUtil();
-        final FileConfiguration configuration = ZorionChat.plugin.getConfig();
-        final String noPermission = configuration.getString("no-permission");
-        final String permission = configuration.getString("reload-permission");
 
-        // [0] Check if arguments are given
+        final FileConfiguration configuration = ZorionChat.plugin.getConfig();
+        final FormatterUtil formatting = new FormatterUtil();
+        final ReloadUtil reload = new ReloadUtil();
+        final ChatLock chatlock = new ChatLock();
+
+        final String permission = configuration.getString("reload-permission");
+        final String lockPermission = configuration.getString("chatlock-permission");
+        final String clearPermission = configuration.getString("chatclear-permission");
+
+        final String noPermission = configuration.getString("no-permission");
+        final String chatCleared = configuration.getString("chat-cleared");
 
         if (args.length > 0) {
 
-            // [1] Executes the reload class, permission check is not handled here
-
             if (args[0].equals("reload")) {
-
-                // [2] Checks if player has permission to execute the reload command
 
                 if (player.hasPermission(permission)) {
 
                     reload.ReloadCommand(sender);
-
-                // [2] Returns error message when the player doesn't have permission
 
                 } else {
 
                     sender.sendMessage(formatting.format(noPermission));
 
                 }
-            }
+            } else if (args[0].equals("lock")) {
 
-        // [0] Returns list of commands when no arguments are given
+                if (sender instanceof Player) {
+
+                    if (player.hasPermission(lockPermission)) {
+
+                        String message = chatlock.chatLock(player);
+                        Bukkit.broadcastMessage(message);
+
+                    } else {
+
+                        player.sendMessage(formatting.format(noPermission));
+
+                    }
+
+                } else {
+
+                    String message = chatlock.chatLock(player);
+                    Bukkit.broadcastMessage(message);
+
+                }
+
+            } else if (args[0].equals("clear")) {
+
+                if (player.hasPermission(clearPermission)) {
+
+                    for (Player tempPlayer : Bukkit.getOnlinePlayers())
+
+                        for (int i = 0; i < 100; i++) {
+
+                            player.sendMessage(" ");
+
+                        }
+
+                    Bukkit.broadcastMessage(formatting.format(chatCleared));
+
+                } else {
+
+                    player.sendMessage(formatting.format(noPermission));
+
+                }
+
+            }
 
         } else {
 
@@ -59,5 +99,7 @@ public class MainCommand implements CommandExecutor {
         return false;
 
     }
+
+    public static HashMap<String, String> chatFlow = new HashMap<String, String>();
 
 }

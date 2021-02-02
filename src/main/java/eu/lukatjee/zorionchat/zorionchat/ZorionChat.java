@@ -26,6 +26,7 @@ public final class ZorionChat extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ChatListener(), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new QuitEvent(), this);
+
         getCommand("zorionchat").setExecutor(new MainCommand());
         getCommand("message").setExecutor(new MessageCommand());
         getCommand("reply").setExecutor(new ReplyCommand());
